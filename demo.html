@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expansion Grid</title>
+  <link rel="stylesheet" href="expansion-grid/expansion-grid.css">
+  <style>
+    /* demo layout */
+    .expansion-grid{
+      list-style: none;
+      max-width: 1200px;
+      padding: 0;
+      margin: 0 auto;
+      overflow: hidden;
+      counter-reset: grid;
+    }
+    .expansion-grid > li{
+      float: left;
+      width: 50%;
+      padding: 0;
+    }
+    .expansion-grid-switch{
+      width: 100%;
+      padding: 100% 0 0;
+      border: 6px solid #fff;
+      font-size: 0;
+      outline: none;
+    }
+    li:nth-child( odd ) .expansion-grid-switch{
+      background-color: #aaa;
+    }
+    li:nth-child( even ) .expansion-grid-switch{
+      background-color: #ccc;
+    }
+    .expansion-grid-switch:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      background: rgba( 255, 255, 255, .8 );
+      opacity: 0;
+      -o-transition: all 400ms ease-out;
+      -moz-transition: all 400ms ease-out;
+      -webkit-transition: all 400ms ease-out;
+      transition: all 400ms ease-out;
+    }
+    .expansion-grid.open-item li:not( .active ) .expansion-grid-switch:before{
+      opacity: 1;
+    }
+    .expansion-grid-switch:after{
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -10px;
+      left: 0;
+      width: 0;
+      border-right: 15px solid transparent;
+      border-bottom: 15px solid #292929;
+      border-left: 15px solid transparent;
+      margin: 0 auto;
+      opacity: 0;
+      -o-transition: opacity 200ms ease-out;
+      -moz-transition: opacity 200ms ease-out;
+      -webkit-transition: opacity 200ms ease-out;
+      transition: opacity 200ms ease-out;
+    }
+    .expansion-grid li.active .expansion-grid-switch:after{
+      opacity: 1;
+    }
+    .expansion-grid-switch span{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 36px;
+      margin: auto;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 36px;
+    }
+    .expansion-grid-switch span:before{
+      counter-increment: grid;
+      content: counter( grid );
+    }
+    .expansion-grid-reveal{
+      padding: 60px;
+      margin: 4px 0 4px;
+      background-color: #292929;
+      color: #fff;
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    @media screen and ( min-width: 992px ){
+
+      .expansion-grid > li{
+        width: 25%;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="expansion-grid">
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget sollicitudin tellus. Cras at posuere augue. Ut vitae urna gravida, molestie diam in, sollicitudin augue. Nam blandit bibendum massa, vel tincidunt dui dignissim vitae. Nulla facilisi. Nam a pharetra nulla, nec tincidunt leo. Integer sit amet odio eget est pretium porttitor. Ut sit amet turpis eu mi rutrum maximus id dictum ipsum. Vestibulum neque diam, condimentum condimentum hendrerit in, ultrices in justo. Integer hendrerit nisi lacus, id facilisis quam imperdiet eget. Cras nec leo ornare, finibus urna eu, tincidunt risus. Donec non dignissim eros. Nam ut libero dictum, cursus nibh non, lobortis risus. Nulla quis gravida nulla. Nunc nisi justo, dignissim quis imperdiet vel, pretium sed diam.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra nisl vel interdum sagittis. Suspendisse sed consectetur erat, vitae porttitor massa.</p>
+        <p>Mauris tincidunt orci nec sem convallis efficitur. In faucibus rutrum vehicula. Nullam bibendum urna a massa convallis, et pellentesque risus efficitur. Sed rutrum est ut lacinia dapibus. Duis in lectus vitae nisi venenatis tincidunt et id enim. Cras tempus venenatis neque non pharetra. Cras fermentum scelerisque nibh eu suscipit.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget sollicitudin tellus. Cras at posuere augue. Ut vitae urna gravida, molestie diam in, sollicitudin augue. Nam blandit bibendum massa, vel tincidunt dui dignissim vitae. Nulla facilisi. Nam a pharetra nulla, nec tincidunt leo. Integer sit amet odio eget est pretium porttitor. Ut sit amet turpis eu mi rutrum maximus id dictum ipsum. Vestibulum neque diam, condimentum condimentum hendrerit in, ultrices in justo. Integer hendrerit nisi lacus, id facilisis quam imperdiet eget. Cras nec leo ornare, finibus urna eu, tincidunt risus. Donec non dignissim eros. Nam ut libero dictum, cursus nibh non, lobortis risus. Nulla quis gravida nulla. Nunc nisi justo, dignissim quis imperdiet vel, pretium sed diam.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra nisl vel interdum sagittis. Suspendisse sed consectetur erat, vitae porttitor massa.</p>
+        <p>Mauris tincidunt orci nec sem convallis efficitur. In faucibus rutrum vehicula. Nullam bibendum urna a massa convallis, et pellentesque risus efficitur. Sed rutrum est ut lacinia dapibus. Duis in lectus vitae nisi venenatis tincidunt et id enim. Cras tempus venenatis neque non pharetra. Cras fermentum scelerisque nibh eu suscipit.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget sollicitudin tellus. Cras at posuere augue. Ut vitae urna gravida, molestie diam in, sollicitudin augue. Nam blandit bibendum massa, vel tincidunt dui dignissim vitae. Nulla facilisi. Nam a pharetra nulla, nec tincidunt leo. Integer sit amet odio eget est pretium porttitor. Ut sit amet turpis eu mi rutrum maximus id dictum ipsum. Vestibulum neque diam, condimentum condimentum hendrerit in, ultrices in justo. Integer hendrerit nisi lacus, id facilisis quam imperdiet eget. Cras nec leo ornare, finibus urna eu, tincidunt risus. Donec non dignissim eros. Nam ut libero dictum, cursus nibh non, lobortis risus. Nulla quis gravida nulla. Nunc nisi justo, dignissim quis imperdiet vel, pretium sed diam.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra nisl vel interdum sagittis. Suspendisse sed consectetur erat, vitae porttitor massa.</p>
+        <p>Mauris tincidunt orci nec sem convallis efficitur. In faucibus rutrum vehicula. Nullam bibendum urna a massa convallis, et pellentesque risus efficitur. Sed rutrum est ut lacinia dapibus. Duis in lectus vitae nisi venenatis tincidunt et id enim. Cras tempus venenatis neque non pharetra. Cras fermentum scelerisque nibh eu suscipit.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget sollicitudin tellus. Cras at posuere augue. Ut vitae urna gravida, molestie diam in, sollicitudin augue. Nam blandit bibendum massa, vel tincidunt dui dignissim vitae. Nulla facilisi. Nam a pharetra nulla, nec tincidunt leo. Integer sit amet odio eget est pretium porttitor. Ut sit amet turpis eu mi rutrum maximus id dictum ipsum. Vestibulum neque diam, condimentum condimentum hendrerit in, ultrices in justo. Integer hendrerit nisi lacus, id facilisis quam imperdiet eget. Cras nec leo ornare, finibus urna eu, tincidunt risus. Donec non dignissim eros. Nam ut libero dictum, cursus nibh non, lobortis risus. Nulla quis gravida nulla. Nunc nisi justo, dignissim quis imperdiet vel, pretium sed diam.</p>
+      </div>
+    </li>
+    <li>
+      <button class="expansion-grid-switch"><span></span></button>
+      <div class="expansion-grid-reveal">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra nisl vel interdum sagittis. Suspendisse sed consectetur erat, vitae porttitor massa.</p>
+        <p>Mauris tincidunt orci nec sem convallis efficitur. In faucibus rutrum vehicula. Nullam bibendum urna a massa convallis, et pellentesque risus efficitur. Sed rutrum est ut lacinia dapibus. Duis in lectus vitae nisi venenatis tincidunt et id enim. Cras tempus venenatis neque non pharetra. Cras fermentum scelerisque nibh eu suscipit.</p>
+      </div>
+    </li>
+  </ul>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="expansion-grid/expansion-grid.js"></script>
+  <script>
+    $( '.expansion-grid' ).expansionGrid({
+      position: true,
+      positionOffset: -6
+    });
+  </script>
+</body>
+
+</html>
