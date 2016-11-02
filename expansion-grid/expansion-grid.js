@@ -32,7 +32,6 @@
 			}
 
 			$grid.find( '.expansion-grid-switch' ).on( 'click', function(){
-			//$( document ).on( 'click', $grid.find( settings.switch ), function(){
 				var $clicked = $( this ).parent(),
 					revealSpace = $( this ).siblings( '.expansion-grid-reveal' ).outerHeight( true ) + initMarginBottom;
 
@@ -50,7 +49,6 @@
 
 					// position
 					if( settings.position ){
-						// fixed elements at top of screen will screw this up:
 						$grid.children( 'li' ).promise().done( function(){
 							$( 'html, body' ).animate( { scrollTop: $clicked.offset().top + settings.positionOffset }, 400 );
 						} );
@@ -65,7 +63,6 @@
 
 			// close button
 			$grid.find( 'button.close' ).on( 'click', function(){
-			//$( document ).on( 'click', $grid.find( 'button.close' ), function(){
 				close();
 			} );
 
