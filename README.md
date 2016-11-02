@@ -12,11 +12,11 @@ Include jQuery (1.7+) and the Expansion Grid plugin files.
 <!-- Expansion Grid Stylesheet -->
 <link rel="stylesheet" href="expansion-grid/expansion-grid.css">
 
-<!-- Simple Slide-Show jQuery Plugin -->
+<!-- Expansion Grid jQuery Plugin -->
 <script src="expansion-grid/expansion-grid.js"></script>
 ```
 
-A list structure is used for the grid, with the parent `ul` (or `ol`) element taking the class `expansion-grid`. Inside of each list (grid) item, include an element with the class `expansion-grid-switch` to reveal expansion content when clicked, and an element with the class `expansion-grid-reveal` to contain whatever content belongs in the expansion.
+A list structure is used for the grid, with the parent `ul` (or `ol`) element taking the class `expansion-grid`. Inside of each grid/list item, include an element with the class `expansion-grid-switch` to reveal expansion content when clicked, and an element with the class `expansion-grid-reveal` to contain whatever content belongs in the expansion.
 
 Any kind of HTML content can be included inside the "switch" and "reveal" elements.
 
@@ -58,5 +58,5 @@ $( '.expansion-grid' ).expansionGrid({
 
 Setting | Type | Default | Description
 --- | --- | --- | ---
-position | boolean | false | When a user opens expansion content, automatically scroll window to line its top up with the top of the expanded item.
-positionOffset | integer | 0 | Number of pixels to offset window position from the top of the expanded item upon automatic scroll.
+position | boolean | false | When a user opens expansion content, automatically scroll window to line its top up with the top of the expanded item. Note: fixed elements at the top of the window are not automatically offset, but can be accounted for with the `positionOffset` setting if their height is static.
+positionOffset | integer | 0 | Number of pixels to offset window position from the top of the expanded item upon automatic positioning.
