@@ -1,18 +1,18 @@
 # Expansion Grid
 
-A responsive grid layout with drop-down expansion content. Requires jQuery 1.7+.
+A responsive grid layout with drop-down expansion content.
 
-Tested support: Chrome, Firefox, Safari. Older browsers that do not support CSS3 drop transition effects but retain basic responsive grid and content expansion functionality.
+Support: Chrome, Firefox, Safari, IE9+. Browsers that do not support CSS3 drop transition effects but retain basic responsive grid and content expansion functionality.
 
 ## Setup
 
-Include jQuery (1.7+) and the Expansion Grid plugin files.
+Include the Expansion Grid stylesheet and script.
 
 ```html
 <!-- Expansion Grid Stylesheet -->
 <link rel="stylesheet" href="expansion-grid/expansion-grid.css">
 
-<!-- Expansion Grid jQuery Plugin -->
+<!-- Expansion Grid Script -->
 <script src="expansion-grid/expansion-grid.js"></script>
 ```
 
@@ -41,22 +41,34 @@ Any kind of HTML content can be included inside the "switch" and "reveal" elemen
 </ul>
 ```
 
-Call the plugin on the `expansion-grid` element with jQuery.
+Initialize the plugin on the `expansion-grid` container.
 
 ```javascript
-// simple
+// jQuery (1.7+) with default settings
 $( '.expansion-grid' ).expansionGrid();
 
-// custom settings
+// jQuery (1.7+) with custom settings
 $( '.expansion-grid' ).expansionGrid({
   position: true,
   positionOffset: -6
 });
+
+// vanilla JavaScript with default settings
+var expansionGrid = new ExpansionGrid( '.expansion-grid' );
+
+// vanilla JavaScript with custom settings
+var expansionGrid = new ExpansionGrid(
+  '.expansion-grid',
+  {
+    position: true,
+    positionOffset: -6
+  }
+);
 ```
 
 ## Settings
 
 Setting | Type | Default | Description
 --- | --- | --- | ---
-position | boolean | false | When a user opens expansion content, automatically scroll window to line its top up with the top of the expanded item. Note: fixed elements at the top of the window are not automatically offset, but can be accounted for with the `positionOffset` setting if their height is static.
+position | boolean | false | When a user opens expansion content, automatically scroll to the top of the expanded item. Note: fixed elements at the top of the window are not automatically offset, but can be accounted for with the `positionOffset` setting if their height is static.
 positionOffset | integer | 0 | Number of pixels to offset window position from the top of the expanded item upon automatic positioning.

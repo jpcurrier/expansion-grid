@@ -162,13 +162,15 @@
       </div>
     </li>
   </ul>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="expansion-grid/expansion-grid.js"></script>
   <script>
-    $( '.expansion-grid' ).expansionGrid({
-      position: true,
-      positionOffset: -6
-    });
+    var expansionGrid = new ExpansionGrid(
+      '.expansion-grid',
+      {
+        position: true,
+        positionOffset: -6
+      }
+    );
   </script>
 </body>
 
