@@ -167,72 +167,84 @@ ExpansionGrid.prototype.build = function( grid ){
     }
   }
 
-  for( i = 0; i < grid.querySelectorAll( '.expansion-grid-switch' ).length; i++ ){
-    grid.querySelectorAll( '.expansion-grid-switch' )[ i ].addEventListener(
-      'click',
-      function(){
-        var clicked = this.parentNode,
-          revealSpace = util.outerHeight( clicked.querySelector( '.expansion-grid-reveal' ) ) + initMarginBottom;
+  var gridSwitch = grid.querySelectorAll( '.expansion-grid-switch' );
+  for( i = 0; i < gridSwitch.length; i++ ){
+    if( !gridSwitch[ i ].getAttribute( 'data-g-switch' ) ) // only add listener once
+      gridSwitch[ i ].addEventListener(
+        'click',
+        function(){
+          if( this.getAttribute( 'data-g-switch' ) === 'true' ){
+            var clicked = this.parentNode,
+              revealSpace = util.outerHeight( clicked.querySelector( '.expansion-grid-reveal' ) ) + initMarginBottom;
 
-        // open
-        if( !util.hasClass( clicked, 'active' ) ){
-          util.addClass( grid, 'open-item' );
-          for( i = 0; i < item.length; i++ )
-            util.removeClass( item[ i ], 'active' );
-          util.addClass( clicked, 'active' );
-          for( i = 0; i < item.length; i++ ){
-            if( item[ i ].offsetTop === clicked.offsetTop )
-              item[ i ].style.marginBottom = revealSpace + 'px';
-            else
-              item[ i ].style.marginBottom = initMarginBottom;
-          }
-
-          // position
-          if( settings.position ){
-            var marginTransition = util.getStyle( item[ 0 ], 'transition-duration' );
-            marginTransition =
-              marginTransition.indexOf( 'ms' ) > -1 ?
-                parseFloat( marginTransition ) :
-                  parseFloat( marginTransition ) * 1000;
-            setTimeout(
-              function(){
-                var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-                if( 'scrollBehavior' in document.documentElement.style )
-                  window.scroll( { top: clicked.getBoundingClientRect().top + scroll + settings.positionOffset, behavior: 'smooth' } );
+            // open
+            if( !util.hasClass( clicked, 'active' ) ){
+              util.addClass( grid, 'open-item' );
+              for( i = 0; i < item.length; i++ )
+                util.removeClass( item[ i ], 'active' );
+              util.addClass( clicked, 'active' );
+              for( i = 0; i < item.length; i++ ){
+                if( item[ i ].offsetTop === clicked.offsetTop )
+                  item[ i ].style.marginBottom = revealSpace + 'px';
                 else
-                  window.scroll( 0, clicked.getBoundingClientRect().top + scroll + settings.positionOffset );
-              },
-              marginTransition
-            );
+                  item[ i ].style.marginBottom = initMarginBottom;
+              }
+
+              // position
+              if( settings.position ){
+                var marginTransition = util.getStyle( item[ 0 ], 'transition-duration' );
+                marginTransition =
+                  marginTransition.indexOf( 'ms' ) > -1 ?
+                    parseFloat( marginTransition ) :
+                      parseFloat( marginTransition ) * 1000;
+                setTimeout(
+                  function(){
+                    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    if( 'scrollBehavior' in document.documentElement.style )
+                      window.scroll( { top: clicked.getBoundingClientRect().top + scroll + settings.positionOffset, behavior: 'smooth' } );
+                    else
+                      window.scroll( 0, clicked.getBoundingClientRect().top + scroll + settings.positionOffset );
+                  },
+                  marginTransition
+                );
+              }
+            }
+
+            // close
+            else
+              close();
           }
         }
+      );
 
-        // close
-        else
-          close();
-      }
-    );
+    gridSwitch[ i ].setAttribute( 'data-g-switch', 'true' );
   }
 
   // close button
-  for( i = 0; i < grid.querySelectorAll( 'button.close' ).length; i++ )
-    grid.querySelectorAll( 'button.close' )[ i ].addEventListener( 'click', close );
+  var btnClose = grid.querySelectorAll( 'button.close' );
+  for( i = 0; i < btnClose.length; i++ ){
+    if( !btnClose[ i ].getAttribute( 'data-g-close' ) )
+      btnClose[ i ].addEventListener( 'click', close );
+    btnClose[ i ].setAttribute( 'data-g-switch', 'true' );
+  }
 
   // resize
   var delay;
-  addEventListener(
-    'resize',
-    function(){
-      clearTimeout( delay );
-      delay = setTimeout(
-        function(){
-          if( grid.querySelector( '.active' ) )
-            spaceGrid(); // calculation fails
-        },
-        200
-      );
-    }
-  );
+  if( !grid.getAttribute( 'data-g-size' ) ) // only add listener once
+    addEventListener(
+      'resize',
+      function(){
+        clearTimeout( delay );
+        delay = setTimeout(
+          function(){
+            if( grid.querySelector( '.active' ) )
+              spaceGrid();
+          },
+          200
+        );
+      }
+    );
+  grid.setAttribute( 'data-g-size', 'true' );
 };
 
 // jQuery plugin
