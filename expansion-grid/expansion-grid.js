@@ -125,8 +125,10 @@ ExpansionGrid.prototype.init = function(){
 ExpansionGrid.prototype.build = function( grid ){
   var settings = this.settings,
     util = this.util,
-    initMarginBottom = parseInt( util.getStyle( grid.firstElementChild, 'margin-bottom' ) ),
-    item = [];
+    initMarginBottom = parseInt( util.getStyle( grid.firstElementChild, 'margin-bottom' ) );
+  if( util.hasClass( grid.firstElementChild, 'active' ) )
+    initMarginBottom -= util.outerHeight( grid.firstElementChild.querySelector( '.expansion-grid-reveal' ) );
+  var item = [];
   for( var i = 0; i < grid.children.length; i++ ){
     if( grid.children[ i ].nodeName === 'LI' )
       item.push( grid.children[ i ] );
